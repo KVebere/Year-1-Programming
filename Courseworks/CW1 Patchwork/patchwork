@@ -1,0 +1,275 @@
+from graphics import *
+
+####################################################
+#shapes
+def drawCircle(win, centre, radius, colour):
+    circles = Circle(centre, radius)
+    circles.setOutline(colour)
+    circles.draw(win)
+
+def drawCircle2(win, centre, radius, colour):
+    circles = Circle(centre, radius)
+    circles.setFill(colour)
+    circles.setOutline(colour)
+    circles.draw(win)
+
+def drawPolygon(win, x1, y1, x2, y2, x3, y3, colour):
+    polygon = Polygon(Point(x1, y1), Point(x2, y2), Point(x3, y3))
+    polygon.setFill(colour)
+    polygon.setOutline(colour)
+    polygon.draw(win)
+    return polygon
+
+def rectangle(win, x, y, outlineColour, fillColour):
+    #win = GraphWin("", 900, 900)
+    p1 = Point(x, y)
+    p2 = Point(x + 100, y + 100)
+    rectangles = Rectangle(p1, p2)
+    rectangles.setOutline(outlineColour)
+    rectangles.setFill(fillColour)
+    rectangles.draw(win)
+    return rectangles
+
+###########################################333
+#Patches
+def drawCirclePatch(win, x, yCord, colour):
+    #win = GraphWin()
+    for y in range(50, 100, 5):
+        drawCircle(win, Point(50 + x, y + yCord), 100 - y, colour)
+
+def drawPolygonPatch(win, xCord, yCord, colour):
+
+    for row in range(0, 100, 40):
+        for colum in range(0, 85, 40):
+            drawPolygon(win, 0 + xCord + row, 0 + yCord + colum, 10 + xCord + row, 10 + yCord + colum, 20 + xCord + row, 0 + yCord + colum, colour)
+            drawPolygon(win, 0 + xCord + row, 10 + yCord + colum, 10 + xCord + row, 20 + yCord + colum, 20 + xCord + row, 10 + yCord + colum, colour)
+
+    for row in range(0, 80, 40):
+            for colum in range(0, 85, 40):
+                drawCircle2(win, Point(30 + xCord + row, 10 + yCord + colum), 9, colour)
+
+    for row in range(0, 80, 40):
+            for colum in range(0, 80, 40):
+                drawPolygon(win, 20 + xCord + row, 20 + yCord + colum, 30 + xCord + row, 30 + yCord + colum, 20 + xCord + row, 40 + yCord + colum, colour)
+                drawPolygon(win, 30 + xCord + row, 20 + yCord + colum, 40 + xCord + row, 30 + yCord + colum, 30 + xCord + row, 40 + yCord + colum, colour)
+
+    for row in range(0, 100, 40):
+        for colum in range(0, 80, 40):
+            drawCircle2(win, Point(10 + xCord + row, 30 + yCord + colum), 9, colour)
+
+
+############################################################################
+#Patchlayouts
+def patchLayout5(win, patchworkSize, colour1, colour2, colour3):
+
+    flag = True
+    for yCord in range(0, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, 0, yCord, "black", "white")
+            drawCirclePatch(win, 0, yCord, colour1)
+        else:
+            rectangle(win, 0, yCord, "black", colour1)
+        flag = not flag
+
+    flag = True
+    for yCord in range(0, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, patchworkSize - 100, yCord, "black", "white")
+            drawCirclePatch(win, patchworkSize - 100, yCord, colour1)
+        else:
+            rectangle(win, patchworkSize - 100, yCord, "black", colour1)
+        flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize - 100, 100):
+        for yCord in range(0, 300, 100):
+            if flag is True:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawPolygonPatch(win, xCord, yCord, colour2)
+            else:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawCirclePatch(win, xCord, yCord, colour2)
+            flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize - 100, 100):
+        for yCord in range(200, patchworkSize, 100):
+            if flag is True:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawPolygonPatch(win, xCord, yCord, colour3)
+            else:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawCirclePatch(win, xCord, yCord, colour3)
+
+            flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, xCord, 200, "black", colour1)
+        else:
+            rectangle(win, xCord, 200, "black", "white")
+            drawCirclePatch(win, xCord, 200, colour1)
+        flag = not flag
+
+def patchLayout7(win, patchworkSize, colour1, colour2, colour3):
+
+    flag = True
+    for yCord in range(0, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, 0, yCord, "black", "white")
+            drawCirclePatch(win, 0, yCord, colour1)
+        else:
+            rectangle(win, 0, yCord, "black", colour1)
+        flag = not flag
+
+    flag = True
+    for yCord in range(0, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, patchworkSize-100, yCord, "black", "white")
+            drawCirclePatch(win, patchworkSize-100, yCord, colour1)
+        else:
+            rectangle(win, patchworkSize-100, yCord, "black", colour1)
+        flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize - 100, 100):
+        for yCord in range(0, 300, 100):
+            if flag is True:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawPolygonPatch(win, xCord, yCord, colour2)
+            else:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawCirclePatch(win, xCord, yCord, colour2)
+            flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize - 100, 100):
+        for yCord in range(400, patchworkSize, 100):
+            if flag is True:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawPolygonPatch(win, xCord, yCord, colour3)
+            else:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawCirclePatch(win, xCord, yCord, colour3)
+            flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, xCord, 300, "black", "white")
+            drawCirclePatch(win, xCord, 300, colour1)
+        else:
+            rectangle(win, xCord, 300, "black", colour1)
+        flag = not flag
+
+
+def patchLayout9(win, patchworkSize, colour1, colour2, colour3):
+
+    flag = True
+    for yCord in range(0, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, 0, yCord, "black", "white")
+            drawCirclePatch(win, 0, yCord, colour1)
+        else:
+            rectangle(win, 0, yCord, "black", colour1)
+        flag = not flag
+
+    flag = True
+    for yCord in range(0, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, patchworkSize-100, yCord, "black", "white")
+            drawCirclePatch(win, patchworkSize-100, yCord, colour1)
+        else:
+            rectangle(win, patchworkSize-100, yCord, "black", colour1)
+        flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize - 100, 100):
+        for yCord in range(0, 500, 100):
+            if flag is True:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawPolygonPatch(win, xCord, yCord, colour2)
+            else:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawCirclePatch(win, xCord, yCord, colour2)
+            flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize - 100, 100):
+        for yCord in range(400, patchworkSize, 100):
+            if flag is True:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawPolygonPatch(win, xCord, yCord, colour3)
+
+            else:
+                rectangle(win, xCord, yCord, "black", "white")
+                drawCirclePatch(win, xCord, yCord, colour3)
+            flag = not flag
+
+    flag = True
+    for xCord in range(100, patchworkSize, 100):
+        if flag is True:
+            rectangle(win, xCord, 400, "black", colour1)
+        else:
+            rectangle(win, xCord, 400, "black", "white")
+            drawCirclePatch(win, xCord, 400, colour1)
+        flag = not flag
+
+
+
+def main():
+
+    colours = ["red", "green", "blue", "magenta", "orange", "yellow", "cyan"]
+    validSizes = [5, 7, 9]
+
+    patchworkSize = input("Enter patchworks size: ")
+    while not patchworkSize.isdigit():
+        print("Please enter valid size! Valid sizes are 5, 7, and 9.")
+        patchworkSize = input("Enter patchworks size: ")
+
+    patchworkSize = int(patchworkSize)
+
+    while patchworkSize not in validSizes:
+        print("Please enter valid size! Valid sizes are 5, 7, and 9.")
+        patchworkSize = int(input("Enter patchworks size: "))
+
+    while True:
+        colour1 = input("Enter the first colour: ")
+        if colour1 not in colours:
+                   print("Please enter valid colour! Valid colours arered, green, blue, magenta, orange, yellow, cyan.")
+        else:
+            break
+
+    while True:
+        colour2 = input("Enter the second colour: ")
+        if colour2 not in colours:
+                   print("Please enter valid colour! Valid colours are red, green, blue, magenta, orange, yellow, cyan.")
+        elif colour2 == colour1:
+            print("Please select different colour!")
+        else:
+            break
+
+    while True:
+        colour3 = input("Enter the third colour: ")
+        if colour3 not in colours:
+            print("Please enter valid colour! Valid colours are red, green, blue, magenta, orange, yellow, cyan.")
+        elif colour3 == colour1 or colour3 == colour2:
+            print("Please select different colour!")
+        else:
+            break
+
+    patchworkSize = patchworkSize*100
+    win = GraphWin("", patchworkSize, patchworkSize)
+
+    if patchworkSize == 500:
+        patchLayout5(win, patchworkSize, colour1, colour2, colour3)
+
+    elif patchworkSize == 700:
+        patchLayout7(win, patchworkSize, colour1, colour2, colour3)
+
+    elif patchworkSize == 900:
+        patchLayout9(win, patchworkSize, colour1, colour2, colour3)
+
+main()
+
