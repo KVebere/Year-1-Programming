@@ -1,0 +1,101 @@
+class SmartDevice:
+    def __init__(self):
+        self.switchedOn = False
+
+    def toggleSwitch(self):
+        self.switchedOn = not self.switchedOn
+
+    def getSwitchedOn(self):
+        if self.switchedOn == True:
+            return "On"
+        else:
+            return "Off"
+        
+    def __str__(self):
+        output = f"SmartDevice({self.switchedOn})"
+        return output
+
+
+class SmartPlug(SmartDevice): 
+    def __init__(self, rate):
+        super().__init__()
+        self.consumptionRate = rate 
+    
+    def getConsumptionRate(self):
+        return self.consumptionRate
+    
+    def setConsumptionRate(self, rate):
+        self.consumptionRate = rate
+
+    def __str__(self):
+        output = f"SmartPlug({self.switchedOn}, {self.consumptionRate})"
+        return output
+    
+class SmartSpeaker(SmartDevice):
+    streaming = ["Spotify", "Apple", "Amazon"]
+
+    def __init__(self, option = "Amazon"):
+        super().__init__()
+        self.option = option
+
+    def toggleSwitch(self):
+        return super().toggleSwitch()
+    
+    def getOption(self):
+        return self.option
+    
+    def getAllOptions(self):
+        return self.streaming
+
+    def setOption(self, option):
+        if option in self.streaming:
+            self.option = option
+ 
+    def __str__(self):
+        output = f"SmartSpeaker({self.switchedOn}, {self.option})"
+        return output
+
+
+class SmartHome:
+    def __init__(self):
+        self.devices = []
+    
+    def getDevices(self):
+        return self.devices
+    
+    def getDeviceAt(self, index):
+        return self.devices[index]
+    
+    def addDevice(self, device):
+        self.devices.append(device)
+
+    def removeDevice(self, index):
+        self.devices.pop(index)
+
+    def toggleSwitch(self, index):
+        self.devices[index].toggleSwitch()
+    
+    def turnOnAll(self):
+        for device in self.devices:
+            if device.getSwitchedOn() == "Off":
+                device.toggleSwitch() 
+
+    def turnOffAll(self):
+        for device in self.devices:
+            if device.getSwitchedOn() == "On":
+                device.toggleSwitch()
+    
+    def clearDevices(self):
+        self.devices = []
+
+
+    def __str__(self):
+        output = "SmartHome("
+        for device in self.devices:
+            output += f"{device}, "
+        output = output[:-2]
+        output += ")"
+        return output
+
+
+    
