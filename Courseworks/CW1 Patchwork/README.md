@@ -32,9 +32,9 @@ own classes.
 # Main program requirements
 Your program should begin by prompting the user, using a text (shell)-based interface, to
 enter, in this order:
-• the patchwork size (i.e. a single figure giving the common width & height in terms of
+- the patchwork size (i.e. a single figure giving the common width & height in terms of
 patches);
-• each of the desired three colours entered one-by-one (separate prompts); the program
+- each of the desired three colours entered one-by-one (separate prompts); the program
 should ensure that the colours are all different from each other.
 
 The program’s user interface should be easy to use, helpful and robust; e.g., on entering
